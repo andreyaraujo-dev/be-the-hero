@@ -1,0 +1,13 @@
+const conncetion = require('../database/connection');
+
+module.exports = {
+  async index(req, res) {
+    const ong_id = req.headers.authorization;
+
+    const incidents = await conncetion('incidents')
+      .where('ong_id', ong_id)
+      .select('*');
+
+    return res.json(incidents);
+  }
+};
